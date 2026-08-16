@@ -1,9 +1,37 @@
 [
-    { "titulo": "VINGADORES DR DESTINO", "arquivo": "vingadores.mp4" },
-    { "titulo": "KAGURABACHI 2027", "arquivo": "kagurabachi.mp4" },
-    { "titulo": "LANTERNAS SERIE", "arquivo": "lanternas.mp4" },
-    { "titulo": "STREET FIGHTER 2026", "arquivo": "streetfighter.mp4" },
-    { "titulo": "PERCY JACKSON T3", "arquivo": "percy3.mp4" },
-    { "titulo": "VISION QUEST DISNEY+", "arquivo": "visionquest.mp4" },
-    { "titulo": "MUTINY JASON STATHAM", "arquivo": "mutiny.mp4" }
+    { 
+        "titulo": "MUTINY: Código Vingança", 
+        "arquivo": "mutiny.mp4", 
+        "data": "2026-09-10 00:00" 
+    },
+    { 
+        "titulo": "VISIONQUEST", 
+        "arquivo": "visionquest.mp4", 
+        "data": "2026-10-13 00:00" 
+    },
+    { 
+        "titulo": "STREET FIGHTER", 
+        "arquivo": "streetfighter.mp4", 
+        "data": "2026-10-15 00:00" 
+    },
+    { 
+        "titulo": "PERCY T3", 
+        "arquivo": "percy3.mp4", 
+        "data": "2026-11-20 00:00" 
+    },
+    { 
+        "titulo": "VINGADORES DR DESTINO", 
+        "arquivo": "vingadores.mp4", 
+        "data": "2026-12-17 00:00" 
+    },
+    { 
+        "titulo": "KAGURABACHI 2027", 
+        "arquivo": "kagurabachi.mp4", 
+        "data": "2027-04-01 00:00" 
+    },
+    {
+        "titulo": "LANTERNAS SÉRIE", 
+        "arquivo": "lanternas.mp4", 
+        "data": "2026-08-16 22:00" 
+    }
 ]
