@@ -16,38 +16,37 @@
 <body>
 
     <header>
-        <h1>RADAR DE LANÇAMENTOS</h1>
+        <h1>LANÇAMENTOS</h1>
     </header>
 
-    <!-- Vingadores -->
-    <div class="card">
-        <video controls>
-            <source src="vingadores.mp4" type="video/mp4">
-        </video>
-        <div class="content">
-            <h2>Vingadores</h2>
-        </div>
-    </div>
+    <!-- Onde os cards vão aparecer automaticamente -->
+    <div id="feed-container"></div>
 
-    <!-- Kagurabachi -->
-    <div class="card">
-        <video controls>
-            <source src="kagurabachi.mp4" type="video/mp4">
-        </video>
-        <div class="content">
-            <h2>Kagurabachi</h2>
-        </div>
-    </div>
-
-    <!-- Lanternas -->
-    <div class="card">
-        <video controls>
-            <source src="lanternas.mp4" type="video/mp4">
-        </video>
-        <div class="content">
-            <h2>Lanternas</h2>
-        </div>
-    </div>
+    <script>
+        fetch('lancamentos.json')
+            .then(response => response.json())
+            .then(videos => {
+                const container = document.getElementById('feed-container');
+                
+                videos.forEach(item => {
+                    const cardDiv = document.createElement('div');
+                    cardDiv.className = 'card';
+                    
+                    cardDiv.innerHTML = `
+                        <video controls playsinline>
+                            <source src="${item.arquivo}" type="video/mp4">
+                            Seu navegador não suporta vídeos.
+                        </video>
+                        <div class="content">
+                            <h2>${item.titulo}</h2>
+                        </div>
+                    `;
+                    
+                    container.appendChild(cardDiv);
+                });
+            })
+            .catch(error => console.error('Erro ao carregar os lançamentos:', error));
+    </script>
 
 </body>
 </html>
