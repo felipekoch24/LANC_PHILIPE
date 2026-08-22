@@ -33,5 +33,35 @@
         "titulo": "LANTERNAS SÉRIE", 
         "arquivo": "lanternas.mp4", 
         "data": "2026-08-16 22:00" 
+    },
+    { 
+        "titulo": "VINGADORES DR DESTINO 2", 
+        "arquivo": "vingadores2.mp4", 
+        "data": "2026-12-17 00:00" 
+     },
+     { 
+        "titulo": "SONIC 4", 
+        "arquivo": "sonic4.mp4", 
+        "data": "2027-03-18 00:00" 
+      },
+      { 
+        "titulo": "BASS X MACHINA - ANIME", 
+        "arquivo": "bassXmachina.mp4", 
+        "data": "2026-11-03 00:00" 
+       },
+       { 
+        "titulo": "SAKAMOTO SEASON 2 - ANIME", 
+        "arquivo": "sakamoto2.mp4", 
+        "data": "2027-01-01 00:00" 
+        },
+        { 
+        "titulo": "CYBERPUNK NOVO ANIME", 
+        "arquivo": "cyberpunkNovo.mp4", 
+        "data": "2026-10-20 00:00" 
+        },
+        { 
+        "titulo": "GOLDEN AXE NOVO", 
+        "arquivo": "goldenAxe.mp4", 
+        "data": "2026-09-16 00:00" 
     }
 ]
