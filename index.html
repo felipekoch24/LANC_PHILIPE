@@ -38,7 +38,7 @@
             padding: 15px;
             display: flex;
             flex-direction: column;
-            gap: 12px;
+            gap: 10px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
         }
 
@@ -53,6 +53,14 @@
             width: 100%;
             border-radius: 6px;
             background-color: #000;
+        }
+
+        /* Estilo da data de lançamento adicionado */
+        .data-lancamento {
+            font-size: 0.85rem;
+            color: #bbbbbb;
+            text-align: center;
+            font-weight: 500;
         }
 
         .timer {
@@ -76,7 +84,7 @@
         fetch('lancamentos.json')
             .then(response => response.json())
             .then(data => {
-                // Inverte para os mais recentes (adicionados no fim do JSON) ficarem no topo
+                // Inverte para os mais recentes ficarem no topo
                 data.reverse();
 
                 const container = document.getElementById('lancamentos-container');
@@ -85,15 +93,19 @@
                     const card = document.createElement('div');
                     card.className = 'card';
 
+                    // Extrai apenas a parte da data (sem a hora)
+                    const dataFormatada = item.data.split(' ')[0];
+
                     card.innerHTML = `
                         <h3>${item.titulo}</h3>
                         <video src="${item.arquivo}" controls preload="metadata"></video>
+                        <div class="data-lancamento">Data de lançamento: ${dataFormatada}</div>
                         <div class="timer"></div>
                     `;
 
                     container.appendChild(card);
 
-                    // Só toca o vídeo ao clicar no play e pausa qualquer outro em execução
+                    // Toca apenas um vídeo por vez
                     const video = card.querySelector('video');
                     video.addEventListener('play', () => {
                         document.querySelectorAll('video').forEach(otherVideo => {
@@ -108,7 +120,6 @@
                     function updateTimer() {
                         let targetDate;
 
-                        // Trata formato DD/MM/AAAA HH:MM ou AAAA-MM-DD HH:MM
                         if (item.data.includes('/')) {
                             const [datePart, timePart] = item.data.split(' ');
                             const [day, month, year] = datePart.split('/');
