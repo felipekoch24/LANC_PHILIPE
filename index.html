@@ -3,104 +3,131 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Radar Geek - Philipe</title>
+    <title>Lançamentos</title>
     <style>
-        body { 
-            background-color: #0b0b0f; 
-            color: #f0f0f0; 
-            font-family: sans-serif; 
-            padding: 20px; 
-            max-width: 600px;
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #121212;
+            color: #ffffff;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 25px;
+            color: #e50914;
+        }
+
+        #lancamentos-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+            max-width: 1200px;
             margin: 0 auto;
         }
-        header { 
-            text-align: center; 
-            margin-bottom: 30px; 
+
+        .card {
+            background-color: #1e1e1e;
+            border-radius: 8px;
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
         }
-        header h1 {
-            color: #e50914;
-            letter-spacing: 2px;
-            font-size: 1.8rem;
+
+        .card h3 {
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: #fff;
         }
-        .card { 
-            background: #14141c; 
-            border-radius: 12px; 
-            overflow: hidden; 
-            margin-bottom: 30px; 
-            border: 1px solid #2a2a38; 
-            box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+
+        .card video {
+            width: 100%;
+            border-radius: 6px;
+            background-color: #000;
         }
-        video { 
-            width: 100%; 
-            display: block; 
-            background: #000;
-        }
-        .content { 
-            padding: 20px; 
-        }
-        h2 { 
-            color: #ffffff; 
-            margin-bottom: 10px; 
-            font-size: 1.2rem; 
-        }
-        .countdown {
-            font-size: 0.9rem;
-            color: #d4af37;
-            margin-top: 8px;
+
+        .timer {
+            font-size: 0.95rem;
             font-weight: bold;
+            color: #00e676;
+            background-color: #2a2a2a;
+            padding: 8px 12px;
+            border-radius: 4px;
+            text-align: center;
         }
     </style>
 </head>
 <body>
 
-    <header>
-        <h1>LANÇAMENTOS</h1>
-    </header>
+    <h1>Próximos Lançamentos</h1>
 
-    <!-- Onde os cards vão aparecer automaticamente lendo o JSON -->
-    <div id="feed-container"></div>
+    <div id="lancamentos-container"></div>
 
     <script>
         fetch('lancamentos.json')
             .then(response => response.json())
-            .then(videos => {
-                const container = document.getElementById('feed-container');
-                
-                videos.forEach((item, index) => {
-                    const cardDiv = document.createElement('div');
-                    cardDiv.className = 'card';
-                    
-                    cardDiv.innerHTML = `
-                        <video controls playsinline>
-                            <source src="${item.arquivo}" type="video/mp4">
-                            Seu navegador não suporta vídeos.
-                        </video>
-                        <div class="content">
-                            <h2>${item.titulo}</h2>
-                            <div class="countdown" id="timer-${index}">Calculando...</div>
-                        </div>
+            .then(data => {
+                // Inverte para os mais recentes (adicionados no fim do JSON) ficarem no topo
+                data.reverse();
+
+                const container = document.getElementById('lancamentos-container');
+
+                data.forEach(item => {
+                    const card = document.createElement('div');
+                    card.className = 'card';
+
+                    card.innerHTML = `
+                        <h3>${item.titulo}</h3>
+                        <video src="${item.arquivo}" controls preload="metadata"></video>
+                        <div class="timer"></div>
                     `;
-                    
-                    container.appendChild(cardDiv);
 
-                    const targetDate = new Date(item.data).getTime();
-                    const timerElement = document.getElementById(`timer-${index}`);
+                    container.appendChild(card);
 
+                    // Só toca o vídeo ao clicar no play e pausa qualquer outro em execução
+                    const video = card.querySelector('video');
+                    video.addEventListener('play', () => {
+                        document.querySelectorAll('video').forEach(otherVideo => {
+                            if (otherVideo !== video) {
+                                otherVideo.pause();
+                            }
+                        });
+                    });
+
+                    // Lógica da contagem regressiva
+                    const timerElement = card.querySelector('.timer');
                     function updateTimer() {
-                        const now = new Date().getTime();
-                        const distance = targetDate - now;
+                        let targetDate;
 
-                        if (distance < 0) {
-                            timerElement.innerHTML = "📺 EM EXIBIÇÃO / JÁ ESTREOU!";
-                            timerElement.style.color = "#4BB543"; // Verde indicando que já rolou
+                        // Trata formato DD/MM/AAAA HH:MM ou AAAA-MM-DD HH:MM
+                        if (item.data.includes('/')) {
+                            const [datePart, timePart] = item.data.split(' ');
+                            const [day, month, year] = datePart.split('/');
+                            targetDate = new Date(`${year}-${month}-${day}T${timePart || '00:00'}`);
+                        } else {
+                            targetDate = new Date(item.data.replace(' ', 'T'));
+                        }
+
+                        const now = new Date();
+                        const diff = targetDate - now;
+
+                        if (diff <= 0) {
+                            timerElement.innerHTML = "Lançado!";
                             return;
                         }
 
-                        const totalHours = Math.floor(distance / (1000 * 60 * 60));
-                        const totalDays = Math.floor(totalHours / 24);
-                        const months = Math.floor(totalDays / 30);
-                        const days = totalDays % 30;
-                        const hours = totalHours % 24;
+                        const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+                        const days = Math.floor((diff / (1000 * 60 * 60 * 24)) % 30);
+                        const months = Math.floor(diff / (1000 * 60 * 60 * 24 * 30));
 
                         let textoTempo = "Faltam: ";
                         if (months > 0) textoTempo += `${months}m `;
