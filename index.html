@@ -55,7 +55,6 @@
             background-color: #000;
         }
 
-        /* Estilo da data de lançamento adicionado */
         .data-lancamento {
             font-size: 0.85rem;
             color: #bbbbbb;
@@ -84,7 +83,7 @@
         fetch('lancamentos.json')
             .then(response => response.json())
             .then(data => {
-                // Inverte para os mais recentes ficarem no topo
+                // Inverte o array para os mais recentes ficarem no topo
                 data.reverse();
 
                 const container = document.getElementById('lancamentos-container');
@@ -93,8 +92,14 @@
                     const card = document.createElement('div');
                     card.className = 'card';
 
-                    // Extrai apenas a parte da data (sem a hora)
-                    const dataFormatada = item.data.split(' ')[0];
+                    // Formata a data para DD/MM/AAAA na exibição
+                    const dataBruta = item.data.split(' ')[0];
+                    let dataFormatada = dataBruta;
+
+                    if (dataBruta.includes('-')) {
+                        const [year, month, day] = dataBruta.split('-');
+                        dataFormatada = `${day}/${month}/${year}`;
+                    }
 
                     card.innerHTML = `
                         <h3>${item.titulo}</h3>
@@ -105,7 +110,7 @@
 
                     container.appendChild(card);
 
-                    // Toca apenas um vídeo por vez
+                    // Garante que só um vídeo toque por vez
                     const video = card.querySelector('video');
                     video.addEventListener('play', () => {
                         document.querySelectorAll('video').forEach(otherVideo => {
@@ -115,7 +120,7 @@
                         });
                     });
 
-                    // Lógica da contagem regressiva
+                    // Lógica inteligente do temporizador
                     const timerElement = card.querySelector('.timer');
                     function updateTimer() {
                         let targetDate;
@@ -136,14 +141,25 @@
                             return;
                         }
 
+                        const seconds = Math.floor((diff / 1000) % 60);
+                        const minutes = Math.floor((diff / (1000 * 60)) % 60);
                         const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
                         const days = Math.floor((diff / (1000 * 60 * 60 * 24)) % 30);
                         const months = Math.floor(diff / (1000 * 60 * 60 * 24 * 30));
 
                         let textoTempo = "Faltam: ";
-                        if (months > 0) textoTempo += `${months}m `;
-                        if (days > 0 || months > 0) textoTempo += `${days}d `;
-                        textoTempo += `${hours}h`;
+
+                        if (months > 0) {
+                            textoTempo += `${months}m ${days}d`;
+                        } else if (days > 0) {
+                            textoTempo += `${days}d ${hours}h`;
+                        } else if (hours > 0) {
+                            textoTempo += `${hours}h ${minutes}min`;
+                        } else if (minutes > 0) {
+                            textoTempo += `${minutes}min ${seconds}s`;
+                        } else {
+                            textoTempo += `${seconds}s`;
+                        }
 
                         timerElement.innerHTML = textoTempo;
                     }
