@@ -47,13 +47,11 @@
         }
 
         .avatar-container {
-            position: relative;
             width: 110px;
             height: 110px;
             border-radius: 50%;
             overflow: hidden;
             border: 3px solid #e50914;
-            cursor: pointer;
         }
 
         .avatar-container img {
@@ -62,24 +60,25 @@
             object-fit: cover;
         }
 
-        .avatar-container input[type="file"] {
-            position: absolute;
-            top: 0;
-            left: 0;
+        .label-secao {
+            font-size: 0.85rem;
+            color: #aaa;
+            text-align: center;
             width: 100%;
-            height: 100%;
-            opacity: 0;
-            cursor: pointer;
+            margin-top: -5px;
         }
 
+        /* Área de avatares pré-selecionados */
         .preset-avatars {
             display: flex;
-            gap: 10px;
+            gap: 12px;
+            justify-content: center;
+            flex-wrap: wrap;
         }
 
         .preset-avatars img {
-            width: 50px;
-            height: 50px;
+            width: 55px;
+            height: 55px;
             border-radius: 50%;
             object-fit: cover;
             cursor: pointer;
@@ -89,6 +88,26 @@
 
         .preset-avatars img:hover {
             border-color: #00e676;
+            transform: scale(1.05);
+        }
+
+        /* Botão estilizado para abrir arquivos do celular */
+        .btn-galeria {
+            background-color: #2a2a2a;
+            color: #fff;
+            border: 1px dashed #666;
+            padding: 10px 15px;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            width: 100%;
+            text-align: center;
+            transition: 0.2s;
+        }
+
+        .btn-galeria:hover {
+            background-color: #333;
+            border-color: #e50914;
         }
 
         .profile-card input[type="text"] {
@@ -119,7 +138,7 @@
             background-color: #b20710;
         }
 
-        /* --- TELA DE LANÇAMENTOS (INICIALMENTE OCULTA) --- */
+        /* --- TELA DE LANÇAMENTOS --- */
         #app-screen {
             display: none;
         }
@@ -224,18 +243,29 @@
     <div id="profile-screen">
         <h1>BEM-VINDO</h1>
         <div class="profile-card">
-            <div class="avatar-container" title="Clique para escolher da galeria">
-                <img id="avatar-preview" src="https://i.imgur.com/6VBx3io.png" alt="Avatar">
-                <input type="file" id="gallery-input" accept="image/*">
+            
+            <!-- Pré-visualização do Avatar Atual -->
+            <div class="avatar-container">
+                <img id="avatar-preview" src="presave.png" alt="Avatar">
             </div>
 
-            <p style="font-size: 0.8rem; color: #aaa;">Escolha um avatar abaixo ou clique na foto para carregar da galeria</p>
+            <span class="label-secao">Escolha uma pré-seleção:</span>
             
+            <!-- Avatares Pré-configurados (Com a imagem presave.png em primeiro) -->
             <div class="preset-avatars">
+                <img src="presave.png" onclick="setAvatar(this.src)" alt="Preset Principal">
                 <img src="https://i.imgur.com/6VBx3io.png" onclick="setAvatar(this.src)" alt="Preset 1">
                 <img src="https://i.imgur.com/1twoaWo.png" onclick="setAvatar(this.src)" alt="Preset 2">
                 <img src="https://i.imgur.com/g9Qh302.png" onclick="setAvatar(this.src)" alt="Preset 3">
             </div>
+
+            <span class="label-secao" style="margin-top: 5px;">Ou envie do seu dispositivo:</span>
+            
+            <!-- Botão dedicado para abrir os arquivos/galeria do celular -->
+            <label class="btn-galeria">
+                📂 Abrir arquivos do celular
+                <input type="file" id="gallery-input" accept="image/*" style="display: none;">
+            </label>
 
             <input type="text" id="username-input" placeholder="Seu Nome" value="Usuário">
 
@@ -258,10 +288,8 @@
     </div>
 
     <script>
-        // Variáveis de controle de perfil
-        let currentAvatar = "https://i.imgur.com/6VBx3io.png";
+        let currentAvatar = "presave.png";
 
-        // Ao carregar a página, verifica se já existe um perfil salvo
         window.addEventListener('DOMContentLoaded', () => {
             const savedName = localStorage.getItem('userName');
             const savedAvatar = localStorage.getItem('userAvatar');
@@ -270,19 +298,16 @@
                 document.getElementById('username-input').value = savedName;
                 currentAvatar = savedAvatar;
                 document.getElementById('avatar-preview').src = currentAvatar;
-                
-                // Entra direto caso já tenha salvo antes
                 entrarApp();
             }
         });
 
-        // Selecionar imagens pré-configuradas
         function setAvatar(src) {
             currentAvatar = src;
             document.getElementById('avatar-preview').src = src;
         }
 
-        // Escolher imagem da própria galeria do dispositivo
+        // Evento para capturar a foto escolhida nos arquivos do celular
         document.getElementById('gallery-input').addEventListener('change', function(event) {
             const file = event.target.files[0];
             if (file) {
@@ -295,23 +320,18 @@
             }
         });
 
-        // Ação do botão Entrar
         function entrarApp() {
             const name = document.getElementById('username-input').value.trim() || 'Usuário';
 
-            // Salva no navegador
             localStorage.setItem('userName', name);
             localStorage.setItem('userAvatar', currentAvatar);
 
-            // Atualiza o topo da tela de lançamentos
             document.getElementById('header-name').textContent = name;
             document.getElementById('header-avatar').src = currentAvatar;
 
-            // Alterna a visibilidade das telas
             document.getElementById('profile-screen').style.display = 'none';
             document.getElementById('app-screen').style.display = 'block';
 
-            // Carrega os dados se ainda não foram carregados
             carregarLancamentos();
         }
 
@@ -320,7 +340,6 @@
             document.getElementById('profile-screen').style.display = 'flex';
         }
 
-        // Lógica de carregar os lançamentos e gerenciar reprodução única de vídeo
         let dadosCarregados = false;
         function carregarLancamentos() {
             if (dadosCarregados) return;
@@ -353,7 +372,6 @@
 
                         container.appendChild(card);
 
-                        // Garante que estritamente apenas UM vídeo toque por vez
                         const video = card.querySelector('video');
                         video.addEventListener('play', () => {
                             document.querySelectorAll('video').forEach(otherVideo => {
