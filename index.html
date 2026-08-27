@@ -68,17 +68,16 @@
             margin-top: -5px;
         }
 
-        /* Área de avatares pré-selecionados */
+        /* Avatar Padrão (presave.png) */
         .preset-avatars {
             display: flex;
             gap: 12px;
             justify-content: center;
-            flex-wrap: wrap;
         }
 
         .preset-avatars img {
-            width: 55px;
-            height: 55px;
+            width: 65px;
+            height: 65px;
             border-radius: 50%;
             object-fit: cover;
             cursor: pointer;
@@ -249,17 +248,14 @@
                 <img id="avatar-preview" src="presave.png" alt="Avatar">
             </div>
 
-            <span class="label-secao">Escolha uma pré-seleção:</span>
+            <span class="label-secao">Usar avatar padrão:</span>
             
-            <!-- Avatares Pré-configurados (Com a imagem presave.png em primeiro) -->
+            <!-- Somente o presave.png como pré-seleção rápida -->
             <div class="preset-avatars">
-                <img src="presave.png" onclick="setAvatar(this.src)" alt="Preset Principal">
-                <img src="https://i.imgur.com/6VBx3io.png" onclick="setAvatar(this.src)" alt="Preset 1">
-                <img src="https://i.imgur.com/1twoaWo.png" onclick="setAvatar(this.src)" alt="Preset 2">
-                <img src="https://i.imgur.com/g9Qh302.png" onclick="setAvatar(this.src)" alt="Preset 3">
+                <img src="presave.png" onclick="setAvatar(this.src)" alt="Avatar Padrão" title="Clique para usar">
             </div>
 
-            <span class="label-secao" style="margin-top: 5px;">Ou envie do seu dispositivo:</span>
+            <span class="label-secao" style="margin-top: 5px;">Ou escolha da galeria do celular:</span>
             
             <!-- Botão dedicado para abrir os arquivos/galeria do celular -->
             <label class="btn-galeria">
