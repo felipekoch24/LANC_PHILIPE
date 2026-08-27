@@ -63,5 +63,20 @@
         "titulo": "GOLDEN AXE NOVO", 
         "arquivo": "goldenAxe.mp4", 
         "data": "2026-09-16 00:00" 
+        },
+        { 
+        "titulo": "SHANGRILA FRONTIER T3", 
+        "arquivo": "shangrila3.mp4", 
+        "data": "01-01-2027 00:00" 
+        },
+        { 
+        "titulo": "SOLO LEVELING 3 FILME", 
+        "arquivo": "solo3.mp4", 
+        "data": "01-12-2027 00:00" 
+        },
+        { 
+        "titulo": "THE ONE PIECE NETFLIX REMAKE", 
+        "arquivo": "t_onepiece.mp4", 
+        "data": "01-02-2027 00:00" 
     }
 ]
