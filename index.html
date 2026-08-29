@@ -352,7 +352,9 @@
                         card.className = 'card';
 
                         let dataFormatada = item.data;
-                        if (item.data !== "A definir") {
+                        const dataString = String(item.data).toUpperCase();
+
+                        if (!dataString.includes('DEFINIR')) {
                             const dataBruta = item.data.split(' ')[0];
                             dataFormatada = dataBruta;
 
@@ -384,8 +386,8 @@
                         const timerElement = card.querySelector('.timer');
                         
                         function updateTimer() {
-                            // Se a data for "A definir", exibe a mensagem bonitinha e sai da função
-                            if (item.data === "A definir") {
+                            // Se a data contiver "definir", exibe a mensagem e sai da função
+                            if (dataString.includes('DEFINIR')) {
                                 timerElement.innerHTML = "Aguardando data oficial";
                                 return;
                             }
@@ -433,9 +435,6 @@
 
                         updateTimer();
                         
-                        // Converte o texto para maiúsculo para pegar qualquer variação (A definir, A DEFINIR, a definir)
-                        const dataString = String(item.data).toUpperCase();
-                        
                         // Só ativa o relógio se a data NÃO tiver a palavra "DEFINIR"
                         if (!dataString.includes('DEFINIR')) {
                             setInterval(updateTimer, 1000);
@@ -444,6 +443,6 @@
                 })
                 .catch(error => console.error('Erro ao carregar os lançamentos:', error));
         }
-</script>
+    </script>
 </body>
 </html>
