@@ -380,6 +380,11 @@
 
                         const timerElement = card.querySelector('.timer');
                         function updateTimer() {
+                            // Se a data for "A definir", exibe a mensagem direto e encerra a função
+    if (item.data === "A definir") {
+        timerElement.innerHTML = "Lançamento: A definir";
+        return;
+    }
                             let targetDate;
 
                             if (item.data.includes('/')) {
