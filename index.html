@@ -351,12 +351,15 @@
                         const card = document.createElement('div');
                         card.className = 'card';
 
-                        const dataBruta = item.data.split(' ')[0];
-                        let dataFormatada = dataBruta;
+                        let dataFormatada = item.data;
+                        if (item.data !== "A definir") {
+                            const dataBruta = item.data.split(' ')[0];
+                            dataFormatada = dataBruta;
 
-                        if (dataBruta.includes('-')) {
-                            const [year, month, day] = dataBruta.split('-');
-                            dataFormatada = `${day}/${month}/${year}`;
+                            if (dataBruta.includes('-')) {
+                                const [year, month, day] = dataBruta.split('-');
+                                dataFormatada = `${day}/${month}/${year}`;
+                            }
                         }
 
                         // Mantido apenas com controls, sem autoplay
@@ -379,12 +382,14 @@
                         });
 
                         const timerElement = card.querySelector('.timer');
+                        
                         function updateTimer() {
-                            // Se a data for "A definir", exibe a mensagem direto e encerra a função
-    if (item.data === "A definir") {
-        timerElement.innerHTML = "Lançamento: A definir";
-        return;
-    }
+                            // Se a data for "A definir", exibe a mensagem bonitinha e sai da função
+                            if (item.data === "A definir") {
+                                timerElement.innerHTML = "Aguardando data oficial";
+                                return;
+                            }
+
                             let targetDate;
 
                             if (item.data.includes('/')) {
@@ -427,7 +432,11 @@
                         }
 
                         updateTimer();
-                        setInterval(updateTimer, 1000);
+                        
+                        // Só ativa o setInterval se não for "A definir"
+                        if (item.data !== "A definir") {
+                            setInterval(updateTimer, 1000);
+                        }
                     });
                 })
                 .catch(error => console.error('Erro ao carregar os lançamentos:', error));
