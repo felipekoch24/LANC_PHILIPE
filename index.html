@@ -433,14 +433,17 @@
 
                         updateTimer();
                         
-                        // Só ativa o setInterval se não for "A definir"
-                        if (item.data !== "A definir") {
+                        // Converte o texto para maiúsculo para pegar qualquer variação (A definir, A DEFINIR, a definir)
+                        const dataString = String(item.data).toUpperCase();
+                        
+                        // Só ativa o relógio se a data NÃO tiver a palavra "DEFINIR"
+                        if (!dataString.includes('DEFINIR')) {
                             setInterval(updateTimer, 1000);
                         }
                     });
                 })
                 .catch(error => console.error('Erro ao carregar os lançamentos:', error));
         }
-    </script>
+</script>
 </body>
 </html>
