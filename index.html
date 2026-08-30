@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Próximos Lançamentos</title>
+    <title>PH UNIVERSE</title>
     <style>
         * {
             box-sizing: border-box;
@@ -192,7 +192,7 @@
             grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
             gap: 20px;
             max-width: 1200px;
-            margin: 0 auto;
+            margin: 0 auto 40px auto;
         }
 
         .card {
@@ -234,30 +234,82 @@
             border-radius: 4px;
             text-align: center;
         }
+
+        /* --- SEÇÃO DE FEEDBACK / WHATSAPP --- */
+        .feedback-section {
+            max-width: 500px;
+            width: 100%;
+            background: #1e1e1e;
+            border: 1px solid #2a2a38;
+            border-radius: 12px;
+            padding: 25px 20px;
+            text-align: center;
+            margin: 40px auto 20px auto;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.6);
+        }
+
+        .feedback-section h3 {
+            font-size: 1.2rem;
+            color: #d4af37;
+            margin-bottom: 8px;
+            letter-spacing: 1px;
+        }
+
+        .feedback-section > p {
+            color: #aaa;
+            font-size: 0.85rem;
+            margin-bottom: 20px;
+        }
+
+        .whatsapp-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .btn-zap {
+            background: transparent;
+            border: 2px solid #25d366;
+            color: #25d366;
+            padding: 12px 16px;
+            border-radius: 12px;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 0.9rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            font-weight: bold;
+        }
+
+        .btn-zap:hover {
+            background: #25d366;
+            color: #121212;
+            transform: scale(1.02);
+        }
     </style>
 </head>
 <body>
 
-    <!-- TELA 1: SELEÇÃO DE PERFIL -->
     <div id="profile-screen">
-        <h1>BEM-VINDO</h1>
+        <h1>PH UNIVERSE</h1>
         <div class="profile-card">
             
-            <!-- Pré-visualização do Avatar Atual -->
             <div class="avatar-container">
                 <img id="avatar-preview" src="presave.png" alt="Avatar">
             </div>
 
             <span class="label-secao">Usar avatar padrão:</span>
             
-            <!-- Somente o presave.png como pré-seleção rápida -->
             <div class="preset-avatars">
                 <img src="presave.png" onclick="setAvatar(this.src)" alt="Avatar Padrão" title="Clique para usar">
             </div>
 
             <span class="label-secao" style="margin-top: 5px;">Ou escolha da galeria do celular:</span>
             
-            <!-- Botão dedicado para abrir os arquivos/galeria do celular -->
             <label class="btn-galeria">
                 📂 Abrir arquivos do celular
                 <input type="file" id="gallery-input" accept="image/*" style="display: none;">
@@ -269,7 +321,6 @@
         </div>
     </div>
 
-    <!-- TELA 2: APLICAÇÃO DE LANÇAMENTOS -->
     <div id="app-screen">
         <div class="header-top">
             <div class="user-greeting">
@@ -281,6 +332,23 @@
 
         <h1>Próximos Lançamentos</h1>
         <div id="lancamentos-container"></div>
+
+        <section class="feedback-section">
+            <h3>Fale Comigo</h3>
+            <p>O que você achou? Envie direto para o meu WhatsApp:</p>
+            
+            <div class="whatsapp-buttons">
+                <a href="https://wa.me/5551995830380?text=Oi,%20estava%20no%20apk%20PH%20UNIVERSE,%20gostaria%20de%20fazer%20uma%20reclamação..." target="_blank" class="btn-zap">
+                    Reclamação 😤
+                </a>
+                <a href="https://wa.me/5551995830380?text=Oi,%20estava%20no%20apk%20PH%20UNIVERSE,%20gostaria%20de%20pedir%20uma%20melhoria..." target="_blank" class="btn-zap">
+                    Upgrade/ Melhoria 🃏
+                </a>
+                <a href="https://wa.me/5551995830380?text=Oi,%20estava%20no%20apk%20PH%20UNIVERSE,%20e%20achei%20muito%20maneiro..." target="_blank" class="btn-zap">
+                    Elogio 🥇
+                </a>
+            </div>
+        </section>
     </div>
 
     <script>
@@ -364,7 +432,6 @@
                             }
                         }
 
-                        // Mantido apenas com controls, sem autoplay
                         card.innerHTML = `
                             <h3>${item.titulo}</h3>
                             <video src="${item.arquivo}" controls preload="metadata"></video>
@@ -386,7 +453,6 @@
                         const timerElement = card.querySelector('.timer');
                         
                         function updateTimer() {
-                            // Se a data contiver "definir", exibe a mensagem e sai da função
                             if (dataString.includes('DEFINIR')) {
                                 timerElement.innerHTML = "Aguardando data oficial";
                                 return;
@@ -435,7 +501,6 @@
 
                         updateTimer();
                         
-                        // Só ativa o relógio se a data NÃO tiver a palavra "DEFINIR"
                         if (!dataString.includes('DEFINIR')) {
                             setInterval(updateTimer, 1000);
                         }
