@@ -248,6 +248,26 @@
             box-shadow: 0 4px 15px rgba(0,0,0,0.6);
         }
 
+        .feedback-section.feedback-top {
+            margin: 15px auto 25px auto;
+            padding: 18px 16px;
+        }
+
+        .feedback-section.feedback-top h3 {
+            font-size: 1rem;
+            margin-bottom: 4px;
+        }
+
+        .feedback-section.feedback-top > p {
+            font-size: 0.8rem;
+            margin-bottom: 12px;
+        }
+
+        .feedback-section.feedback-top .btn-zap {
+            padding: 8px 12px;
+            font-size: 0.8rem;
+        }
+
         .feedback-section h3 {
             font-size: 1.2rem;
             color: #d4af37;
@@ -265,6 +285,11 @@
             display: flex;
             flex-direction: column;
             gap: 12px;
+        }
+
+        .feedback-section.feedback-top .whatsapp-buttons {
+            flex-direction: row;
+            gap: 8px;
         }
 
         .btn-zap {
@@ -289,6 +314,14 @@
             background: #25d366;
             color: #121212;
             transform: scale(1.02);
+        }
+
+        .feedback-section.feedback-top .btn-zap {
+            flex: 1;
+            font-size: 0.75rem;
+            padding: 8px 6px;
+            border-radius: 8px;
+            gap: 4px;
         }
     </style>
 </head>
@@ -330,6 +363,17 @@
             <button class="btn-trocar" onclick="trocarPerfil()">Trocar Perfil</button>
         </div>
 
+        <!-- FEEDBACK NO TOPO -->
+        <section class="feedback-section feedback-top">
+            <h3>Fale Comigo</h3>
+            <p>Mande sua mensagem direto no WhatsApp:</p>
+            <div class="whatsapp-buttons">
+                <a href="[wa.me](https://wa.me/5551995830380?text=Oi,%20estava%20no%20apk%20PH%20UNIVERSE,%20gostaria%20de%20fazer%20uma%20reclamação)" target="_blank" class="btn-zap">😤 Reclamação</a>
+                <a href="[wa.me](https://wa.me/5551995830380?text=Oi,%20estava%20no%20apk%20PH%20UNIVERSE,%20gostaria%20de%20pedir%20uma%20melhoria)" target="_blank" class="btn-zap"> Upgrade</a>
+                <a href="[wa.me](https://wa.me/5551995830380?text=Oi,%20estava%20no%20apk%20PH%20UNIVERSE,%20e%20achei%20muito%20maneiro)" target="_blank" class="btn-zap">🥇 Elogio</a>
+            </div>
+        </section>
+
         <h1>Próximos Lançamentos</h1>
         <div id="lancamentos-container"></div>
 
@@ -338,13 +382,13 @@
             <p>O que você achou? Envie direto para o meu WhatsApp:</p>
             
             <div class="whatsapp-buttons">
-                <a href="https://wa.me/5551995830380?text=Oi,%20estava%20no%20apk%20PH%20UNIVERSE,%20gostaria%20de%20fazer%20uma%20reclamação..." target="_blank" class="btn-zap">
+                <a href="[wa.me](https://wa.me/5551995830380?text=Oi,%20estava%20no%20apk%20PH%20UNIVERSE,%20gostaria%20de%20fazer%20uma%20reclamação)" target="_blank" class="btn-zap">
                     Reclamação 😤
                 </a>
-                <a href="https://wa.me/5551995830380?text=Oi,%20estava%20no%20apk%20PH%20UNIVERSE,%20gostaria%20de%20pedir%20uma%20melhoria..." target="_blank" class="btn-zap">
+                <a href="[wa.me](https://wa.me/5551995830380?text=Oi,%20estava%20no%20apk%20PH%20UNIVERSE,%20gostaria%20de%20pedir%20uma%20melhoria)" target="_blank" class="btn-zap">
                     Upgrade/ Melhoria 🃏
                 </a>
-                <a href="https://wa.me/5551995830380?text=Oi,%20estava%20no%20apk%20PH%20UNIVERSE,%20e%20achei%20muito%20maneiro..." target="_blank" class="btn-zap">
+                <a href="[wa.me](https://wa.me/5551995830380?text=Oi,%20estava%20no%20apk%20PH%20UNIVERSE,%20e%20achei%20muito%20maneiro)" target="_blank" class="btn-zap">
                     Elogio 🥇
                 </a>
             </div>
