@@ -266,7 +266,7 @@
             text-align: center;
         }
 
-        /* --- SEÇÃO DO DESENVOLVEDOR (FIPE) --- */
+        /* --- SEÇÃO DO DESENVOLVEDOR --- */
         .dev-section {
             max-width: 600px;
             width: 100%;
@@ -295,32 +295,7 @@
             margin-bottom: 20px;
         }
 
-        /* --- SEÇÃO DE FEEDBACK / WHATSAPP --- */
-        .feedback-section {
-            max-width: 500px;
-            width: 100%;
-            background: #1e1e1e;
-            border: 1px solid #2a2a38;
-            border-radius: 12px;
-            padding: 25px 20px;
-            text-align: center;
-            margin: 40px auto 20px auto;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.6);
-        }
-
-        .feedback-section h3 {
-            font-size: 1.2rem;
-            color: #d4af37;
-            margin-bottom: 8px;
-            letter-spacing: 1px;
-        }
-
-        .feedback-section > p {
-            color: #aaa;
-            font-size: 0.85rem;
-            margin-bottom: 20px;
-        }
-
+        /* --- SEÇÃO DE WHATSAPP --- */
         .whatsapp-buttons {
             display: flex;
             flex-direction: column;
@@ -401,10 +376,14 @@
 
         <div id="lancamentos-container"></div>
 
-        <!-- SEÇÃO DO DESENVOLVEDOR (FIPE) -->
+        <!-- SEÇÃO DO DESENVOLVEDOR -->
         <section class="dev-section">
-            <img src="presave.png" alt="Felipe" class="dev-avatar">
-            <p>Olá aqui é o Felipe, o desenvolvedor, meu coração fica quentinho de saber que meu projeto é útil pra você.<br>E qualquer melhoria, upgrade, reclamação, elogio, ou se quiser desabafar clique nos botões abaixo que ira diretamente ao meu Whatsapp.<br>Gratidão 🤍</p>
+            <picture>
+                <source srcset="dev.png" type="image/png">
+                <source srcset="dev.jpeg" type="image/jpeg">
+                <img src="dev.png" alt="Felipe" class="dev-avatar">
+            </picture>
+            <p>Olá aqui é o Felipe, o desenvolvedor, a imagem acima é pq eu amo um anime kkk, mas meu coração fica quentinho de saber que meu projeto é útil pra você.<br>E qualquer melhoria, upgrade, reclamação, elogio, ou se quiser desabafar clique nos botões abaixo que ira diretamente ao meu Whatsapp.<br>Gratidão 🤍</p>
             
             <div class="whatsapp-buttons">
                 <a href="https://wa.me/5551995830380?text=Oi,%20estava%20no%20apk%20PH%20UNIVERSE,%20gostaria%20de%20fazer%20uma%20reclama%C3%A7%C3%A3o" target="_blank" class="btn-zap">
@@ -522,19 +501,15 @@
                 const isLancado = targetDate && targetDate <= now;
 
                 if (abaAtual === 'lancados') {
-                    // Apenas os que já passaram da data atual
                     return isLancado;
                 } else if (abaAtual === 'proximos') {
-                    // Se não tiver data definida, fica fora ou dentro? Vamos deixar fora se for "a definir" ou incluir se preferir. Aqui excluímos "a definir" dos próximos de 3 meses para focar nos com data exata.
                     if (isDefinir || isLancado) return false;
                     
-                    // Diferença em meses (máximo 3 meses)
                     const diffTime = targetDate - now;
                     const diffDays = diffTime / (1000 * 60 * 60 * 24);
-                    return diffDays >= 0 && diffDays <= 92; // aprox 3 meses (92 dias)
+                    return diffDays >= 0 && diffDays <= 92; // 3 meses (92 dias)
                 }
                 
-                // Aba 'todos' exibe tudo
                 return true;
             });
 
@@ -542,8 +517,6 @@
                 container.innerHTML = `<p style="grid-column: 1 / -1; text-align: center; color: #888; padding: 20px;">Nenhum item encontrado nesta categoria.</p>`;
                 return;
             }
-
-            dadosFiltrados.icoEach(item => { /* caso ocorra erro no metodo customizado abaixo */ });
 
             dadosFiltrados.forEach(item => {
                 const card = document.createElement('div');
@@ -621,4 +594,13 @@
                 }
 
                 updateTimer();
-  
+                
+                if (!dataString.includes('DEFINIR')) {
+                    setInterval(updateTimer, 1000);
+                }
+            });
+        }
+    </script>
+</body>
+</html>
+
