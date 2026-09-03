@@ -135,7 +135,7 @@
             background-color: #b20710;
         }
 
-        /* --- TELA DE LANÇAMENTOS --- */
+        /* --- TELA DO APP --- */
         #app-screen {
             display: none;
         }
@@ -183,6 +183,39 @@
             text-align: center;
             margin-bottom: 25px;
             color: #e50914;
+        }
+
+        /* --- SISTEMA DE ABAS --- */
+        .tabs-container {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            max-width: 1200px;
+            margin: 0 auto 25px auto;
+            flex-wrap: wrap;
+        }
+
+        .tab-btn {
+            background-color: #1e1e1e;
+            color: #aaa;
+            border: 1px solid #333;
+            padding: 10px 20px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+        }
+
+        .tab-btn:hover {
+            color: #fff;
+            border-color: #555;
+        }
+
+        .tab-btn.active {
+            background-color: #e50914;
+            color: #fff;
+            border-color: #e50914;
         }
 
         #lancamentos-container {
@@ -233,6 +266,35 @@
             text-align: center;
         }
 
+        /* --- SEÇÃO DO DESENVOLVEDOR (FIPE) --- */
+        .dev-section {
+            max-width: 600px;
+            width: 100%;
+            background: #1e1e1e;
+            border: 1px solid #2a2a38;
+            border-radius: 12px;
+            padding: 25px 20px;
+            text-align: center;
+            margin: 40px auto;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.6);
+        }
+
+        .dev-avatar {
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid #e50914;
+            margin-bottom: 15px;
+        }
+
+        .dev-section p {
+            color: #ddd;
+            font-size: 0.95rem;
+            line-height: 1.5;
+            margin-bottom: 20px;
+        }
+
         /* --- SEÇÃO DE FEEDBACK / WHATSAPP --- */
         .feedback-section {
             max-width: 500px;
@@ -244,21 +306,6 @@
             text-align: center;
             margin: 40px auto 20px auto;
             box-shadow: 0 4px 15px rgba(0,0,0,0.6);
-        }
-
-        .feedback-section.feedback-top {
-            margin: 15px auto 25px auto;
-            padding: 18px 16px;
-        }
-
-        .feedback-section.feedback-top h3 {
-            font-size: 1rem;
-            margin-bottom: 4px;
-        }
-
-        .feedback-section.feedback-top > p {
-            font-size: 0.8rem;
-            margin-bottom: 12px;
         }
 
         .feedback-section h3 {
@@ -278,11 +325,6 @@
             display: flex;
             flex-direction: column;
             gap: 12px;
-        }
-
-        .feedback-section.feedback-top .whatsapp-buttons {
-            flex-direction: row;
-            gap: 8px;
         }
 
         .btn-zap {
@@ -307,14 +349,6 @@
             background: #25d366;
             color: #121212;
             transform: scale(1.02);
-        }
-
-        .feedback-section.feedback-top .btn-zap {
-            flex: 1;
-            font-size: 0.75rem;
-            padding: 8px 6px;
-            border-radius: 8px;
-            gap: 4px;
         }
     </style>
 </head>
@@ -356,23 +390,21 @@
             <button class="btn-trocar" onclick="trocarPerfil()">Trocar Perfil</button>
         </div>
 
-        <!-- FEEDBACK NO TOPO -->
-        <section class="feedback-section feedback-top">
-            <h3>Fale Comigo</h3>
-            <p>Mande sua mensagem direto no WhatsApp:</p>
-            <div class="whatsapp-buttons">
-                <a href="https://wa.me/5551995830380?text=Oi,%20estava%20no%20apk%20PH%20UNIVERSE,%20gostaria%20de%20fazer%20uma%20reclama%C3%A7%C3%A3o" target="_blank" class="btn-zap">😤 Reclamação</a>
-                <a href="https://wa.me/5551995830380?text=Oi,%20estava%20no%20apk%20PH%20UNIVERSE,%20gostaria%20de%20pedir%20uma%20melhoria" target="_blank" class="btn-zap">🃏 Upgrade</a>
-                <a href="https://wa.me/5551995830380?text=Oi,%20estava%20no%20apk%20PH%20UNIVERSE,%20e%20achei%20muito%20maneiro" target="_blank" class="btn-zap">🥇 Elogio</a>
-            </div>
-        </section>
+        <h1>PH UNIVERSE</h1>
 
-        <h1>Próximos Lançamentos</h1>
+        <!-- ABAS DE NAVEGAÇÃO -->
+        <div class="tabs-container">
+            <button class="tab-btn active" onclick="mudarAba('todos', this)">TODOS</button>
+            <button class="tab-btn" onclick="mudarAba('proximos', this)">PRÓXIMOS LANÇAMENTOS</button>
+            <button class="tab-btn" onclick="mudarAba('lancados', this)">LANÇADOS</button>
+        </div>
+
         <div id="lancamentos-container"></div>
 
-        <section class="feedback-section">
-            <h3>Fale Comigo</h3>
-            <p>O que você achou? Envie direto para o meu WhatsApp:</p>
+        <!-- SEÇÃO DO DESENVOLVEDOR (FIPE) -->
+        <section class="dev-section">
+            <img src="presave.png" alt="Felipe" class="dev-avatar">
+            <p>Olá aqui é o Felipe, o desenvolvedor, meu coração fica quentinho de saber que meu projeto é útil pra você.<br>E qualquer melhoria, upgrade, reclamação, elogio, ou se quiser desabafar clique nos botões abaixo que ira diretamente ao meu Whatsapp.<br>Gratidão 🤍</p>
             
             <div class="whatsapp-buttons">
                 <a href="https://wa.me/5551995830380?text=Oi,%20estava%20no%20apk%20PH%20UNIVERSE,%20gostaria%20de%20fazer%20uma%20reclama%C3%A7%C3%A3o" target="_blank" class="btn-zap">
@@ -390,6 +422,8 @@
 
     <script>
         let currentAvatar = "presave.png";
+        let todosDados = [];
+        let abaAtual = 'todos';
 
         window.addEventListener('DOMContentLoaded', () => {
             const savedName = localStorage.getItem('userName');
@@ -440,6 +474,13 @@
             document.getElementById('profile-screen').style.display = 'flex';
         }
 
+        function mudarAba(aba, elementoBtn) {
+            abaAtual = aba;
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            elementoBtn.classList.add('active');
+            renderizarCards();
+        }
+
         let dadosCarregados = false;
         function carregarLancamentos() {
             if (dadosCarregados) return;
@@ -449,101 +490,135 @@
                 .then(response => response.json())
                 .then(data => {
                     data.reverse();
-                    const container = document.getElementById('lancamentos-container');
-
-                    data.forEach(item => {
-                        const card = document.createElement('div');
-                        card.className = 'card';
-
-                        let dataFormatada = item.data;
-                        const dataString = String(item.data).toUpperCase();
-
-                        if (!dataString.includes('DEFINIR')) {
-                            const dataBruta = item.data.split(' ')[0];
-                            dataFormatada = dataBruta;
-
-                            if (dataBruta.includes('-')) {
-                                const [year, month, day] = dataBruta.split('-');
-                                dataFormatada = `${day}/${month}/${year}`;
-                            }
-                        }
-
-                        card.innerHTML = `
-                            <h3>${item.titulo}</h3>
-                            <video src="${item.arquivo}" controls preload="metadata"></video>
-                            <div class="data-lancamento">Data de lançamento: ${dataFormatada}</div>
-                            <div class="timer"></div>
-                        `;
-
-                        container.appendChild(card);
-
-                        const video = card.querySelector('video');
-                        video.addEventListener('play', () => {
-                            document.querySelectorAll('video').forEach(otherVideo => {
-                                if (otherVideo !== video) {
-                                    otherVideo.pause();
-                                }
-                            });
-                        });
-
-                        const timerElement = card.querySelector('.timer');
-                        
-                        function updateTimer() {
-                            if (dataString.includes('DEFINIR')) {
-                                timerElement.innerHTML = "Aguardando data oficial";
-                                return;
-                            }
-
-                            let targetDate;
-
-                            if (item.data.includes('/')) {
-                                const [datePart, timePart] = item.data.split(' ');
-                                const [day, month, year] = datePart.split('/');
-                                targetDate = new Date(`${year}-${month}-${day}T${timePart || '00:00'}`);
-                            } else {
-                                targetDate = new Date(item.data.replace(' ', 'T'));
-                            }
-
-                            const now = new Date();
-                            const diff = targetDate - now;
-
-                            if (diff <= 0) {
-                                timerElement.innerHTML = "Lançado!";
-                                return;
-                            }
-
-                            const seconds = Math.floor((diff / 1000) % 60);
-                            const minutes = Math.floor((diff / (1000 * 60)) % 60);
-                            const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
-                            const days = Math.floor((diff / (1000 * 60 * 60 * 24)) % 30);
-                            const months = Math.floor(diff / (1000 * 60 * 60 * 24 * 30));
-
-                            let textoTempo = "Faltam: ";
-
-                            if (months > 0) {
-                                textoTempo += `${months}m ${days}d`;
-                            } else if (days > 0) {
-                                textoTempo += `${days}d ${hours}h`;
-                            } else if (hours > 0) {
-                                textoTempo += `${hours}h ${minutes}min`;
-                            } else if (minutes > 0) {
-                                textoTempo += `${minutes}min ${seconds}s`;
-                            } else {
-                                textoTempo += `${seconds}s`;
-                            }
-
-                            timerElement.innerHTML = textoTempo;
-                        }
-
-                        updateTimer();
-                        
-                        if (!dataString.includes('DEFINIR')) {
-                            setInterval(updateTimer, 1000);
-                        }
-                    });
+                    todosDados = data;
+                    renderizarCards();
                 })
                 .catch(error => console.error('Erro ao carregar os lançamentos:', error));
         }
-    </script>
-</body>
-</html>
+
+        function parseDataAlvo(itemData) {
+            const dataString = String(itemData).toUpperCase();
+            if (dataString.includes('DEFINIR')) return null;
+
+            if (itemData.includes('/')) {
+                const [datePart, timePart] = itemData.split(' ');
+                const [day, month, year] = datePart.split('/');
+                return new Date(`${year}-${month}-${day}T${timePart || '00:00'}`);
+            } else {
+                return new Date(itemData.replace(' ', 'T'));
+            }
+        }
+
+        function renderizarCards() {
+            const container = document.getElementById('lancamentos-container');
+            container.innerHTML = '';
+
+            const now = new Date();
+
+            const dadosFiltrados = todosDados.filter(item => {
+                const targetDate = parseDataAlvo(item.data);
+                const dataString = String(item.data).toUpperCase();
+                const isDefinir = dataString.includes('DEFINIR');
+                const isLancado = targetDate && targetDate <= now;
+
+                if (abaAtual === 'lancados') {
+                    // Apenas os que já passaram da data atual
+                    return isLancado;
+                } else if (abaAtual === 'proximos') {
+                    // Se não tiver data definida, fica fora ou dentro? Vamos deixar fora se for "a definir" ou incluir se preferir. Aqui excluímos "a definir" dos próximos de 3 meses para focar nos com data exata.
+                    if (isDefinir || isLancado) return false;
+                    
+                    // Diferença em meses (máximo 3 meses)
+                    const diffTime = targetDate - now;
+                    const diffDays = diffTime / (1000 * 60 * 60 * 24);
+                    return diffDays >= 0 && diffDays <= 92; // aprox 3 meses (92 dias)
+                }
+                
+                // Aba 'todos' exibe tudo
+                return true;
+            });
+
+            if (dadosFiltrados.length === 0) {
+                container.innerHTML = `<p style="grid-column: 1 / -1; text-align: center; color: #888; padding: 20px;">Nenhum item encontrado nesta categoria.</p>`;
+                return;
+            }
+
+            dadosFiltrados.icoEach(item => { /* caso ocorra erro no metodo customizado abaixo */ });
+
+            dadosFiltrados.forEach(item => {
+                const card = document.createElement('div');
+                card.className = 'card';
+
+                let dataFormatada = item.data;
+                const dataString = String(item.data).toUpperCase();
+
+                if (!dataString.includes('DEFINIR')) {
+                    const dataBruta = item.data.split(' ')[0];
+                    dataFormatada = dataBruta;
+
+                    if (dataBruta.includes('-')) {
+                        const [year, month, day] = dataBruta.split('-');
+                        dataFormatada = `${day}/${month}/${year}`;
+                    }
+                }
+
+                card.innerHTML = `
+                    <h3>${item.titulo}</h3>
+                    <video src="${item.arquivo}" controls preload="metadata"></video>
+                    <div class="data-lancamento">Data de lançamento: ${dataFormatada}</div>
+                    <div class="timer"></div>
+                `;
+
+                container.appendChild(card);
+
+                const video = card.querySelector('video');
+                video.addEventListener('play', () => {
+                    document.querySelectorAll('video').forEach(otherVideo => {
+                        if (otherVideo !== video) {
+                            otherVideo.pause();
+                        }
+                    });
+                });
+
+                const timerElement = card.querySelector('.timer');
+                
+                function updateTimer() {
+                    if (dataString.includes('DEFINIR')) {
+                        timerElement.innerHTML = "Aguardando data oficial";
+                        return;
+                    }
+
+                    const targetDate = parseDataAlvo(item.data);
+                    const now = new Date();
+                    const diff = targetDate - now;
+
+                    if (diff <= 0) {
+                        timerElement.innerHTML = "Lançado!";
+                        return;
+                    }
+
+                    const seconds = Math.floor((diff / 1000) % 60);
+                    const minutes = Math.floor((diff / (1000 * 60)) % 60);
+                    const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+                    const days = Math.floor((diff / (1000 * 60 * 60 * 24)) % 30);
+                    const months = Math.floor(diff / (1000 * 60 * 60 * 24 * 30));
+
+                    let textoTempo = "Faltam: ";
+
+                    if (months > 0) {
+                        textoTempo += `${months}m ${days}d`;
+                    } else if (days > 0) {
+                        textoTempo += `${days}d ${hours}h`;
+                    } else if (hours > 0) {
+                        textoTempo += `${hours}h ${minutes}min`;
+                    } else if (minutes > 0) {
+                        textoTempo += `${minutes}min ${seconds}s`;
+                    } else {
+                        textoTempo += `${seconds}s`;
+                    }
+
+                    timerElement.innerHTML = textoTempo;
+                }
+
+                updateTimer();
+  
