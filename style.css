@@ -1,0 +1,320 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #121212;
+    color: #ffffff;
+    padding: 20px;
+}
+
+/* --- TELA DE PERFIL (INÍCIO) --- */
+#profile-screen {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 90vh;
+    gap: 20px;
+}
+
+#profile-screen h1 {
+    color: #e50914;
+    font-size: 2.5rem;
+}
+
+.profile-card {
+    background-color: #1e1e1e;
+    padding: 30px;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.6);
+    width: 100%;
+    max-width: 400px;
+}
+
+.avatar-container {
+    width: 110px;
+    height: 110px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 3px solid #e50914;
+}
+
+.avatar-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.label-secao {
+    font-size: 0.85rem;
+    color: #aaa;
+    text-align: center;
+    width: 100%;
+    margin-top: -5px;
+}
+
+.preset-avatars {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+}
+
+.preset-avatars img {
+    width: 65px;
+    height: 65px;
+    border-radius: 50%;
+    object-fit: cover;
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: 0.2s;
+}
+
+.preset-avatars img:hover {
+    border-color: #00e676;
+    transform: scale(1.05);
+}
+
+.btn-galeria {
+    background-color: #2a2a2a;
+    color: #fff;
+    border: 1px dashed #666;
+    padding: 10px 15px;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    width: 100%;
+    text-align: center;
+    transition: 0.2s;
+}
+
+.btn-galeria:hover {
+    background-color: #333;
+    border-color: #e50914;
+}
+
+.profile-card input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    border-radius: 6px;
+    border: 1px solid #333;
+    background-color: #2a2a2a;
+    color: #fff;
+    text-align: center;
+    font-size: 1.1rem;
+}
+
+.btn-entrar {
+    background-color: #e50914;
+    color: #fff;
+    border: none;
+    padding: 12px 30px;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    width: 100%;
+    transition: background 0.2s;
+}
+
+.btn-entrar:hover {
+    background-color: #b20710;
+}
+
+/* --- TELA DO APP --- */
+#app-screen {
+    display: none;
+}
+
+.header-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto 25px auto;
+}
+
+.user-greeting {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: #1e1e1e;
+    padding: 8px 15px;
+    border-radius: 30px;
+}
+
+.user-greeting img {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.btn-trocar {
+    background: transparent;
+    border: 1px solid #bbbbbb;
+    color: #bbbbbb;
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.8rem;
+}
+
+.btn-trocar:hover {
+    border-color: #fff;
+    color: #fff;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 25px;
+    color: #e50914;
+}
+
+/* --- SISTEMA DE ABAS --- */
+.tabs-container {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    max-width: 1200px;
+    margin: 0 auto 25px auto;
+    flex-wrap: wrap;
+}
+
+.tab-btn {
+    background-color: #1e1e1e;
+    color: #aaa;
+    border: 1px solid #333;
+    padding: 10px 20px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 0.9rem;
+    transition: all 0.2s;
+}
+
+.tab-btn:hover {
+    color: #fff;
+    border-color: #555;
+}
+
+.tab-btn.active {
+    background-color: #e50914;
+    color: #fff;
+    border-color: #e50914;
+}
+
+#lancamentos-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+    max-width: 1200px;
+    margin: 0 auto 40px auto;
+}
+
+.card {
+    background-color: #1e1e1e;
+    border-radius: 8px;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+}
+
+.card h3 {
+    font-size: 1.1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: #fff;
+}
+
+.card video {
+    width: 100%;
+    border-radius: 6px;
+    background-color: #000;
+}
+
+.data-lancamento {
+    font-size: 0.85rem;
+    color: #bbbbbb;
+    text-align: center;
+    font-weight: 500;
+}
+
+.timer {
+    font-size: 0.95rem;
+    font-weight: bold;
+    color: #00e676;
+    background-color: #2a2a2a;
+    padding: 8px 12px;
+    border-radius: 4px;
+    text-align: center;
+}
+
+/* --- SEÇÃO DO DESENVOLVEDOR --- */
+.dev-section {
+    max-width: 600px;
+    width: 100%;
+    background: #1e1e1e;
+    border: 1px solid #2a2a38;
+    border-radius: 12px;
+    padding: 25px 20px;
+    text-align: center;
+    margin: 40px auto;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.6);
+}
+
+.dev-avatar {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #e50914;
+    margin-bottom: 15px;
+}
+
+.dev-section p {
+    color: #ddd;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    margin-bottom: 20px;
+}
+
+/* --- SEÇÃO DE WHATSAPP --- */
+.whatsapp-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.btn-zap {
+    background: transparent;
+    border: 2px solid #25d366;
+    color: #25d366;
+    padding: 12px 16px;
+    border-radius: 12px;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 0.9rem;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-weight: bold;
+}
+
+.btn-zap:hover {
+    background: #25d366;
+    color: #121212;
+    transform: scale(1.02);
+}
