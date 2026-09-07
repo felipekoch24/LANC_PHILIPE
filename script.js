@@ -53,7 +53,7 @@ function trocarPerfil() {
 
 function mudarAba(aba, elementoBtn) {
     abaAtual = aba;
-    document.querySelectorAll('.menu-tab').forEach(btn => btn.classList.remove('active'));
+    document.querySelectorAll('.menu-btn').forEach(btn => btn.classList.remove('active'));
     elementoBtn.classList.add('active');
     renderizarCards();
 }
@@ -91,7 +91,6 @@ function renderizarCards() {
     const devSection = document.getElementById('dev-section-container');
     container.innerHTML = '';
 
-    // Se estiver na aba 'suporte', esconde os cards e mostra apenas a seção do dev destacada
     if (abaAtual === 'suporte') {
         container.style.display = 'none';
         devSection.style.display = 'block';
@@ -99,13 +98,15 @@ function renderizarCards() {
     }
 
     container.style.display = 'grid';
-    devSection.style.display = 'none'; // Nas outras abas o suporte fica oculto ou pode aparecer no fim se preferir
+    devSection.style.display = 'none';
 
     const now = new Date();
     let dadosFiltrados = [];
 
     if (abaAtual === 'inicio') {
         dadosFiltrados = todosDados.slice(0, 4);
+    } else if (abaAtual === 'todos') {
+        dadosFiltrados = todosDados;
     } else if (abaAtual === 'lancados') {
         dadosFiltrados = todosDados.filter(item => {
             const targetDate = parseDataAlvo(item.data);
@@ -119,12 +120,10 @@ function renderizarCards() {
             
             const diffTime = targetDate - now;
             const diffDays = diffTime / (1000 * 60 * 60 * 24);
-            return diffDays >= 0 && diffDays <= 60; // Até 2 meses
+            return diffDays >= 0 && diffDays <= 60;
         });
 
         dadosFiltrados.sort((a, b) => parseDataAlvo(a.data) - parseDataAlvo(b.data));
-    } else {
-        dadosFiltrados = todosDados;
     }
 
     if (dadosFiltrados.length === 0) {
@@ -151,7 +150,7 @@ function renderizarCards() {
 
         card.innerHTML = `
             <h3>${item.titulo}</h3>
-            <video data-src="${item.arquivo}" controls preload="none"></video>
+            <video data-src="${item.arquivo}" controls preload="none" style="background: #000;"></video>
             <div class="data-lancamento">Data de lançamento: ${dataFormatada}</div>
             <div class="timer"></div>
         `;
@@ -221,11 +220,10 @@ function renderizarCards() {
     });
 }
 
-// Funções para abrir e fechar o zoom da foto do desenvolvedor
 function abrirZoomDev() {
     document.getElementById('dev-zoom-modal').style.display = 'flex';
 }
 
 function fecharZoomDev() {
     document.getElementById('dev-zoom-modal').style.display = 'none';
-}
+                                           }
