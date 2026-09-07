@@ -46,22 +46,20 @@
             <button class="btn-trocar" onclick="trocarPerfil()">Trocar Perfil</button>
         </div>
 
-        <h1>PH UNIVERSE</h1>
-
-        <!-- MENU BASEADO NA SUA IMAGEM -->
+        <!-- SUA ARTE COMPLETA FUNCIONANDO COMO MENU E BANNER -->
         <div class="custom-menu-bar">
-            <button class="menu-tab active" onclick="mudarAba('inicio', this)">INÍCIO</button>
-            <button class="menu-tab" onclick="mudarAba('todos', this)">TODOS</button>
-            <button class="menu-tab" onclick="mudarAba('proximos', this)">PROX LANÇAMENTOS</button>
-            <button class="menu-tab" onclick="mudarAba('suporte', this)">SUPORTE</button>
+            <button class="menu-btn" onclick="mudarAba('inicio', this)" title="Início"></button>
+            <button class="menu-btn" onclick="mudarAba('todos', this)" title="Todos"></button>
+            <button class="menu-btn" onclick="mudarAba('proximos', this)" title="Próximos Lançamentos"></button>
+            <button class="menu-btn" onclick="mudarAba('lancados', this)" title="Já Lançados"></button>
+            <button class="menu-btn" onclick="mudarAba('suporte', this)" title="Suporte"></button>
         </div>
 
-        <!-- CONTEÚDO DINÂMICO (INSERIDO VIA JS) -->
+        <!-- CONTEÚDO DINÂMICO DOS VÍDEOS -->
         <div id="lancamentos-container"></div>
 
-        <!-- SEÇÃO DO DESENVOLVEDOR (EXIBIDA NA ABA SUPORTE OU NO FIM) -->
-        <section id="dev-section-container" class="dev-section">
-            <!-- Foto clicável para dar zoom -->
+        <!-- SEÇÃO DO DESENVOLVEDOR (ABA SUPORTE) -->
+        <section id="dev-section-container" class="dev-section" style="display: none;">
             <picture onclick="abrirZoomDev()">
                 <source srcset="dev.png" type="image/png">
                 <source srcset="dev.jpeg" type="image/jpeg">
