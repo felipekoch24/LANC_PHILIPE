@@ -53,7 +53,7 @@ function trocarPerfil() {
 
 function mudarAba(aba, elementoBtn) {
     abaAtual = aba;
-    document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+    document.querySelectorAll('.menu-tab').forEach(btn => btn.classList.remove('active'));
     elementoBtn.classList.add('active');
     renderizarCards();
 }
@@ -90,7 +90,16 @@ function renderizarCards() {
     const container = document.getElementById('lancamentos-container');
     const devSection = document.getElementById('dev-section-container');
     container.innerHTML = '';
-    devSection.style.display = 'block';
+
+    // Se estiver na aba 'suporte', esconde os cards e mostra apenas a seção do dev destacada
+    if (abaAtual === 'suporte') {
+        container.style.display = 'none';
+        devSection.style.display = 'block';
+        return;
+    }
+
+    container.style.display = 'grid';
+    devSection.style.display = 'none'; // Nas outras abas o suporte fica oculto ou pode aparecer no fim se preferir
 
     const now = new Date();
     let dadosFiltrados = [];
@@ -140,7 +149,6 @@ function renderizarCards() {
             }
         }
 
-        // Usamos data-src para impedir que o navegador baixe o vídeo antes do play
         card.innerHTML = `
             <h3>${item.titulo}</h3>
             <video data-src="${item.arquivo}" controls preload="none"></video>
@@ -152,7 +160,6 @@ function renderizarCards() {
 
         const video = card.querySelector('video');
 
-        // Carrega o vídeo e pausa os outros somente ao dar o play
         video.addEventListener('play', () => {
             if (!video.getAttribute('src')) {
                 video.src = video.getAttribute('data-src');
@@ -212,4 +219,13 @@ function renderizarCards() {
             setInterval(updateTimer, 1000);
         }
     });
+}
+
+// Funções para abrir e fechar o zoom da foto do desenvolvedor
+function abrirZoomDev() {
+    document.getElementById('dev-zoom-modal').style.display = 'flex';
+}
+
+function fecharZoomDev() {
+    document.getElementById('dev-zoom-modal').style.display = 'none';
 }
