@@ -8,6 +8,7 @@
 </head>
 <body>
 
+    <!-- TELA DE PERFIL (INÍCIO) -->
     <div id="profile-screen">
         <h1>PH UNIVERSE</h1>
         <div class="profile-card">
@@ -35,6 +36,7 @@
         </div>
     </div>
 
+    <!-- TELA PRINCIPAL DO APP -->
     <div id="app-screen">
         <div class="header-top">
             <div class="user-greeting">
@@ -48,15 +50,17 @@
 
         <!-- ABAS DE NAVEGAÇÃO -->
         <div class="tabs-container">
-            <button class="tab-btn active" onclick="mudarAba('todos', this)">TODOS</button>
-            <button class="tab-btn" onclick="mudarAba('proximos', this)">PRÓXIMOS LANÇAMENTOS</button>
-            <button class="tab-btn" onclick="mudarAba('lancados', this)">LANÇADOS</button>
+            <button class="tab-btn active" onclick="mudarAba('inicio', this)">🏠 INÍCIO</button>
+            <button class="tab-btn" onclick="mudarAba('todos', this)">📁 TODOS</button>
+            <button class="tab-btn" onclick="mudarAba('proximos', this)">⏳ PRÓXIMOS</button>
+            <button class="tab-btn" onclick="mudarAba('lancados', this)">🚀 LANÇADOS</button>
         </div>
 
+        <!-- CONTEÚDO DINÂMICO (INSERIDO VIA JS) -->
         <div id="lancamentos-container"></div>
 
         <!-- SEÇÃO DO DESENVOLVEDOR -->
-        <section class="dev-section">
+        <section id="dev-section-container" class="dev-section">
             <picture>
                 <source srcset="dev.png" type="image/png">
                 <source srcset="dev.jpeg" type="image/jpeg">
