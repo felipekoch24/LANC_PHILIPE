@@ -140,9 +140,10 @@ function renderizarCards() {
             }
         }
 
+        // Usamos data-src para impedir que o navegador baixe o vídeo antes do play
         card.innerHTML = `
             <h3>${item.titulo}</h3>
-            <video src="${item.arquivo}" controls preload="metadata"></video>
+            <video data-src="${item.arquivo}" controls preload="none"></video>
             <div class="data-lancamento">Data de lançamento: ${dataFormatada}</div>
             <div class="timer"></div>
         `;
@@ -150,7 +151,14 @@ function renderizarCards() {
         container.appendChild(card);
 
         const video = card.querySelector('video');
+
+        // Carrega o vídeo e pausa os outros somente ao dar o play
         video.addEventListener('play', () => {
+            if (!video.getAttribute('src')) {
+                video.src = video.getAttribute('data-src');
+                video.load();
+            }
+
             document.querySelectorAll('video').forEach(otherVideo => {
                 if (otherVideo !== video) {
                     otherVideo.pause();
@@ -204,4 +212,4 @@ function renderizarCards() {
             setInterval(updateTimer, 1000);
         }
     });
-            }
+}
