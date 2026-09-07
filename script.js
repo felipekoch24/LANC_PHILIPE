@@ -1,6 +1,6 @@
 let currentAvatar = "presave.png";
 let todosDados = [];
-let abaAtual = 'todos';
+let abaAtual = 'inicio';
 
 window.addEventListener('DOMContentLoaded', () => {
     const savedName = localStorage.getItem('userName');
@@ -88,34 +88,34 @@ function parseDataAlvo(itemData) {
 
 function renderizarCards() {
     const container = document.getElementById('lancamentos-container');
+    const devSection = document.getElementById('dev-section-container');
     container.innerHTML = '';
+    devSection.style.display = 'block';
 
     const now = new Date();
+    let dadosFiltrados = [];
 
-    let dadosFiltrados = todosDados.filter(item => {
-        const targetDate = parseDataAlvo(item.data);
-        const dataString = String(item.data).toUpperCase();
-        const isDefinir = dataString.includes('DEFINIR');
-        const isLancado = targetDate && targetDate <= now;
-
-        if (abaAtual === 'lancados') {
-            return isLancado;
-        } else if (abaAtual === 'proximos') {
-            if (isDefinir || isLancado) return false;
+    if (abaAtual === 'inicio') {
+        dadosFiltrados = todosDados.slice(0, 4);
+    } else if (abaAtual === 'lancados') {
+        dadosFiltrados = todosDados.filter(item => {
+            const targetDate = parseDataAlvo(item.data);
+            return targetDate && targetDate <= now;
+        });
+    } else if (abaAtual === 'proximos') {
+        dadosFiltrados = todosDados.filter(item => {
+            const targetDate = parseDataAlvo(item.data);
+            const dataString = String(item.data).toUpperCase();
+            if (dataString.includes('DEFINIR') || (targetDate && targetDate <= now)) return false;
             
             const diffTime = targetDate - now;
             const diffDays = diffTime / (1000 * 60 * 60 * 24);
-            return diffDays >= 0 && diffDays <= 60; // 2 meses (60 dias)
-        }
-        
-        return true;
-    });
-
-    // Se estiver na aba "próximos", ordena do que falta menos tempo para o que falta mais
-    if (abaAtual === 'proximos') {
-        dadosFiltrados.sort((a, b) => {
-            return parseDataAlvo(a.data) - parseDataAlvo(b.data);
+            return diffDays >= 0 && diffDays <= 60; // Até 2 meses
         });
+
+        dadosFiltrados.sort((a, b) => parseDataAlvo(a.data) - parseDataAlvo(b.data));
+    } else {
+        dadosFiltrados = todosDados;
     }
 
     if (dadosFiltrados.length === 0) {
@@ -204,4 +204,4 @@ function renderizarCards() {
             setInterval(updateTimer, 1000);
         }
     });
-}
+            }
