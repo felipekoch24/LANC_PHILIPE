@@ -48,23 +48,24 @@
 
         <h1>PH UNIVERSE</h1>
 
-        <!-- ABAS DE NAVEGAÇÃO -->
-        <div class="tabs-container">
-            <button class="tab-btn active" onclick="mudarAba('inicio', this)">🏠 INÍCIO</button>
-            <button class="tab-btn" onclick="mudarAba('todos', this)">📁 TODOS</button>
-            <button class="tab-btn" onclick="mudarAba('proximos', this)">⏳ PRÓXIMOS</button>
-            <button class="tab-btn" onclick="mudarAba('lancados', this)">🚀 LANÇADOS</button>
+        <!-- MENU BASEADO NA SUA IMAGEM -->
+        <div class="custom-menu-bar">
+            <button class="menu-tab active" onclick="mudarAba('inicio', this)">INÍCIO</button>
+            <button class="menu-tab" onclick="mudarAba('todos', this)">TODOS</button>
+            <button class="menu-tab" onclick="mudarAba('proximos', this)">PROX LANÇAMENTOS</button>
+            <button class="menu-tab" onclick="mudarAba('suporte', this)">SUPORTE</button>
         </div>
 
         <!-- CONTEÚDO DINÂMICO (INSERIDO VIA JS) -->
         <div id="lancamentos-container"></div>
 
-        <!-- SEÇÃO DO DESENVOLVEDOR -->
+        <!-- SEÇÃO DO DESENVOLVEDOR (EXIBIDA NA ABA SUPORTE OU NO FIM) -->
         <section id="dev-section-container" class="dev-section">
-            <picture>
+            <!-- Foto clicável para dar zoom -->
+            <picture onclick="abrirZoomDev()">
                 <source srcset="dev.png" type="image/png">
                 <source srcset="dev.jpeg" type="image/jpeg">
-                <img src="dev.png" alt="Felipe" class="dev-avatar">
+                <img src="dev.png" alt="Felipe" class="dev-avatar" title="Clique para ampliar a imagem">
             </picture>
             <p>Olá aqui é o Felipe, o desenvolvedor, a imagem acima é pq eu adoro anime, mas continuando kkk, meu coração fica quentinho de saber que meu projeto é útil pra você.<br>E qualquer melhoria, upgrade, reclamação, elogio, ou se quiser desabafar clique nos botões abaixo que irá diretamente ao meu Whatsapp.<br>Gratidão 🤍</p>
             
@@ -80,6 +81,14 @@
                 </a>
             </div>
         </section>
+    </div>
+
+    <!-- MODAL DE ZOOM DA FOTO DO DEV -->
+    <div id="dev-zoom-modal" class="zoom-modal">
+        <div class="zoom-content">
+            <img id="zoom-img-src" src="dev.png" alt="Dev Zoom">
+            <button class="btn-fechar-zoom" onclick="fecharZoomDev()">❌ FECHAR</button>
+        </div>
     </div>
 
     <script src="script.js"></script>
